@@ -27,7 +27,6 @@ build:
   steps:
     - internal/docker-build: 
         dockerfile: Dockerfile
-        image_name:  
         tag: $WERCKER_GIT_BRANCH_$WERCKER_GIT_COMMIT
     
     - internal/docker-push: 
