@@ -2,6 +2,9 @@ FROM python:alpine3.6
 
 MAINTAINER Dave Franco <dave.franco@oracle.com>
 
+#Upgrade pip before anything as a test
+RUN pip install --upgrade pip
+
 #App directory
 RUN mkdir /src
 WORKDIR /src
