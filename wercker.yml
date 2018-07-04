@@ -27,6 +27,8 @@ build:
   steps:
     - internal/docker-build: 
         dockerfile: Dockerfile
+     	username: $OCITENANT/$OCIUSER
+        password: $OCITOKEN
         image-name: iad.ocir.io/$OCITENANT/api
         tag: $WERCKER_GIT_BRANCH_$WERCKER_GIT_COMMIT
 
