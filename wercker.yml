@@ -38,10 +38,10 @@ build:
         image-name: dfranco/api
 
     - internal/docker-push: 
-        image: dfranco/api
+        #image: dfranco/api
         username: $OCITENANT/$OCIUSER 
         password: $OCITOKEN
         registry: https://iad.ocir.io/v2/
         repository: iad.ocir.io/$OCITENANT/api
-        tag: test #$WERCKER_GIT_BRANCH_$WERCKER_GIT_COMMIT
+        tag: test2 #$WERCKER_GIT_BRANCH_$WERCKER_GIT_COMMIT
 

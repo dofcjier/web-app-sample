@@ -3,3 +3,4 @@
 .wercker/
 wercker.env
 wercker.yml
+pipeline/
