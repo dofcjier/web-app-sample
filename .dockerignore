@@ -2,4 +2,4 @@
 .vscode/
 .wercker/
 wercker.env
-Dockerfile.base
+wercker.yml
