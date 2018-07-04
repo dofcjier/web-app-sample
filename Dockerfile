@@ -1,15 +1,12 @@
-FROM python:alpine3.6
+FROM iad.ocir.io/gse00014267/api_base:latest
 
 MAINTAINER Dave Franco <dave.franco@oracle.com>
 
 #App directory
-RUN mkdir /src
 WORKDIR /src
 
 #Move source into container image
 COPY src/ .
-#Install app dependencies
-RUN pip install -r requirements.txt
 
 #Expose server port
 EXPOSE 5000
