@@ -6,7 +6,7 @@
 # If you want Google's container you would reference google/python
 # Read more about containers on our dev center
 # http://devcenter.wercker.com/docs/containers/index.html
-box: ubuntu:17.10
+box: python:alpine3.6
 # You can also use services such as databases. Read more on our dev center:
 # http://devcenter.wercker.com/docs/services/index.html
 # services:
@@ -25,23 +25,24 @@ build:
   # Read more about steps on our dev center:
   # http://devcenter.wercker.com/docs/steps/index.html
   steps:
+
+    - script:
+        name: build project's dependency environment
+        code: |
+            pip install virtualenv
+            virtualenv venv
+            venv/bin/pip install -r src/requirements.txt
+
     - internal/docker-build: 
         dockerfile: Dockerfile
-        username: $OCITENANT/$OCIUSER
-        password: $OCITOKEN
         image-name: iad.ocir.io/$OCITENANT/api
-        tag: $WERCKER_GIT_BRANCH_$WERCKER_GIT_COMMIT
+        tag: build
 
     - internal/docker-push: 
-        image: iad.ocir.io/$OCITENANT/api
+        image: iad.ocir.io/$OCITENANT/api:build
         username: $OCITENANT/$OCIUSER 
         password: $OCITOKEN
-        registry: https://iad.ocir.io
+        registry: https://iad.ocir.io/v2/
         repository: iad.ocir.io/$OCITENANT/api
         tag: $WERCKER_GIT_BRANCH_$WERCKER_GIT_COMMIT
 
-    # - script:
-    #     name: echo python information
-    #     code: |
-    #       echo "python version $(python --version) running"
-    #       echo "pip version $(pip --version) running"
