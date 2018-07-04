@@ -36,6 +36,7 @@ build:
     - internal/docker-build: 
         dockerfile: Dockerfile
         image-name: build-image
+        nocache: true
 
     - internal/docker-push: 
         image: build-image
