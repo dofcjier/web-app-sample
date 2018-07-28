@@ -46,24 +46,25 @@ build:
     - internal/docker-run:
         image: build-app
         name: myTestContainer
-        ports:
-            5000:5000
     
+    # - script:
+    #     name: test spected result
+    #     code: |
+    #         if curlOutput=`curl -s http://myTestContainer:5000 | jq -r '.name'`; then 
+    #             if [ "$curlOutput" == "My REST API sample" ]; then
+    #                 echo "Test passed: container gave expected response"
+    #             else
+    #                 echo "Test failed: container gave unexpected response: " $curlOutput
+    #                 exit 1
+    #             fi   
+    #         else 
+    #             echo "Test failed: container did not respond"
+    #             exit 1
+    #         fi      
     - script:
-        name: test spected result
+        name: testing script
         code: |
-            if curlOutput=`curl -s http://localhost:5000 | jq -r '.name'`; then 
-                echo $curlOutput
-                if [ "$curlOutput" == "My REST API sample" ]; then
-                    echo "Test passed: container gave expected response"
-                else
-                    echo "Test failed: container gave unexpected response: " $curlOutput
-                    exit 1
-                fi   
-            else 
-                echo "Test failed: container did not respond"
-                exit 1
-            fi        
+            curl -s http://myTestContainer:5000
 
     - internal/docker-kill:
         name: myTestContainer 
