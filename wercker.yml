@@ -64,9 +64,7 @@ build:
     - script:
         name: testing script
         code: |
-            which curl
-            which jq
-            curl -s http://myTestContainer:5000 2>&1
+            curl -I myTestContainer:5000
 
     - internal/docker-kill:
         name: myTestContainer 
