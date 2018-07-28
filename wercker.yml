@@ -35,13 +35,13 @@ build:
     - script:
         name: install dependencies
         code: |
-            apt-get update -y && apt-get install -y jq
+            apt-get update -y && apt-get install -y jq curl
 
     - internal/docker-build: 
         dockerfile: Dockerfile
         image-name: build-app
         nocache: true
-        
+
 
     - internal/docker-run:
         image: build-app
