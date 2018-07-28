@@ -50,7 +50,8 @@ build:
     - script:
         name: test spected result
         code: |
-            if curlOutput=`curl -s myTestContainer:5000 | jq -r '.name'`; then 
+            if curlOutput=`curl -s myTestContainer:5000 | jq '.name'`; then 
+                echo $curlOutput
                 if [ "$curlOutput" == "My REST API sample" ]; then
                     echo "Test passed: container gave expected response"
                 else
