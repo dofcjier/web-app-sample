@@ -46,6 +46,8 @@ build:
     - internal/docker-run:
         image: build-app
         name: myTestContainer
+        ports:
+            5000:5000
     
     - script:
         name: test spected result
