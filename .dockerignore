@@ -4,3 +4,6 @@
 wercker.env
 wercker.yml
 pipeline/
+
+#Application cached files
+src/*.pyc

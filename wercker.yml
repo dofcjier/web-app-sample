@@ -6,7 +6,7 @@
 # If you want Google's container you would reference google/python
 # Read more about containers on our dev center
 # http://devcenter.wercker.com/docs/containers/index.html
-box: python:alpine3.6
+box: ubuntu
 # You can also use services such as databases. Read more on our dev center:
 # http://devcenter.wercker.com/docs/services/index.html
 # services:
@@ -26,12 +26,12 @@ build:
   # http://devcenter.wercker.com/docs/steps/index.html
   steps:
 
-    - script:
-        name: build project's dependency environment
-        code: |
-            pip install virtualenv
-            virtualenv venv
-            venv/bin/pip install -r src/requirements.txt
+    # - script:
+    #     name: build project's dependency environment
+    #     code: |
+    #         pip install virtualenv
+    #         virtualenv venv
+    #         venv/bin/pip install -r src/requirements.txt
 
     - internal/docker-build: 
         dockerfile: Dockerfile
@@ -44,5 +44,5 @@ build:
         password: $OCITOKEN
         registry: https://iad.ocir.io/v2/
         repository: iad.ocir.io/$OCITENANT/api
-        tag: test3 #$WERCKER_GIT_BRANCH_$WERCKER_GIT_COMMIT
+        tag: $WERCKER_GIT_BRANCH_$WERCKER_GIT_COMMIT
 
