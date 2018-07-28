@@ -40,8 +40,6 @@ build:
     - internal/docker-build: 
         dockerfile: Dockerfile
         image-name: build-app
-        nocache: true
-
 
     - internal/docker-run:
         image: build-app
@@ -66,8 +64,8 @@ build:
         code: |
             curl -I myTestContainer:5000
 
-    - internal/docker-kill:
-        name: myTestContainer 
+    # - internal/docker-kill:
+    #     name: myTestContainer 
 
 push:
 
