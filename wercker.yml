@@ -32,11 +32,37 @@ build:
     #         pip install virtualenv
     #         virtualenv venv
     #         venv/bin/pip install -r src/requirements.txt
+    - script:
+        name: install dependencies
+        code: |
+            apt-get update && apt-get install jq
 
     - internal/docker-build: 
         dockerfile: Dockerfile
-        image-name: build-image
+        image-name: build-app
         nocache: true
+
+test:
+
+    - internal/docker-run:
+        image: build-app
+        name: myTestContainer
+    
+    - script:
+        name: test spected result
+        code: |
+            if curlOutput=`curl -s myTestContainer:5000 | jq -r '.name'`; then 
+                if [ "$curlOutput" == "My REST API sample" ]; then
+                    echo "Test passed: container gave expected response"
+                else
+                    echo "Test failed: container gave unexpected response: " $curlOutput
+                    exit 1
+                fi   
+            else 
+                echo "Test failed: container did not respond"
+                exit 1
+            fi        
+push:
 
     - internal/docker-push: 
         image: build-image
