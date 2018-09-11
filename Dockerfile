@@ -1,6 +1,6 @@
 FROM python:alpine3.6
 
-MAINTAINER Dave Franco <dave.franco@oracle.com>
+MAINTAINER Dofc Sensual <jose.espinoza.1991@gmail.com>
 
 #App directory
 RUN mkdir /src
